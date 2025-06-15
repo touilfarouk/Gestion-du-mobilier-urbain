@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUBCITY Urban Furniture Management</title>
+    <title>PUBCITY Gestion du Mobilier Urbain</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -228,8 +228,12 @@
         
         .modal-footer {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             margin-top: 20px;
+        }
+        
+        .modal-footer .left-buttons {
+            display: flex;
         }
         
         .material-icon {
@@ -281,6 +285,13 @@
             cursor: pointer;
         }
         
+        .leaflet-control-layers {
+            background: white;
+            padding: 5px;
+            border-radius: 4px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
         @media (max-width: 768px) {
             #map-container {
                 flex-direction: column;
@@ -318,14 +329,14 @@
     <div id="map-container">
         <div id="sidebar">
             <div class="sidebar-header">
-                <h2>PUBCITY Products</h2>
+                <h2>PUBCITY Mobilier Urbain</h2>
                 <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-chevron-left"></i></button>
             </div>
             
             <div class="filter-section">
-                <h3>Filters</h3>
+                <h3>Filtres</h3>
                 <select id="type-filter">
-                    <option value="all">All Types</option>
+                    <option value="all">Tous les types</option>
                     <option value="abri_voyageurs">Abri Voyageurs</option>
                     <option value="bancs">Bancs</option>
                     <option value="kiosques">Kiosques</option>
@@ -335,26 +346,26 @@
                 </select>
                 
                 <select id="status-filter">
-                    <option value="all">All Statuses</option>
-                    <option value="installed">Installed</option>
-                    <option value="pending">Pending</option>
+                    <option value="all">Tous les statuts</option>
+                    <option value="installed">Installé</option>
+                    <option value="pending">En attente</option>
                     <option value="maintenance">Maintenance</option>
                 </select>
                 
                 <select id="material-filter">
-                    <option value="all">All Materials</option>
-                    <option value="glass">Tempered Glass</option>
+                    <option value="all">Tous les matériaux</option>
+                    <option value="glass">Verre Trempé</option>
                     <option value="amika">Amika</option>
-                    <option value="metal">Sheet Metal</option>
-                    <option value="aluminum">Aluminum</option>
+                    <option value="metal">Tôle</option>
+                    <option value="aluminum">Aluminium</option>
                 </select>
             </div>
             
             <div class="actions-section">
-                <button id="reset-view-btn"><i class="fas fa-home"></i> Reset View</button>
-                <button id="export-btn" class="warning"><i class="fas fa-file-export"></i> Export Data</button>
+                <button id="reset-view-btn"><i class="fas fa-home"></i> Réinitialiser</button>
+                <button id="export-btn" class="warning"><i class="fas fa-file-export"></i> Exporter</button>
                 <div class="file-input-container">
-                    <button class="file-input-button success"><i class="fas fa-file-import"></i> Import Data</button>
+                    <button class="file-input-button success"><i class="fas fa-file-import"></i> Importer</button>
                     <input type="file" id="import-file" class="file-input" accept=".xlsx,.xls,.csv">
                 </div>
             </div>
@@ -366,7 +377,7 @@
         
         <div id="map">
             <div class="map-click-instruction">
-                <i class="fas fa-mouse-pointer"></i> Click on map to add a product
+                <i class="fas fa-mouse-pointer"></i> Cliquez sur la carte pour ajouter un produit
             </div>
         </div>
     </div>
@@ -375,17 +386,17 @@
     <div class="modal" id="furniture-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-title">Add a Product</h3>
+                <h3 id="modal-title">Ajouter un Produit</h3>
                 <button class="close-modal">&times;</button>
             </div>
             <form id="furniture-form">
                 <input type="hidden" id="furniture-id">
                 <div class="form-group">
-                    <label for="furniture-name">Product Name</label>
+                    <label for="furniture-name">Nom du Produit</label>
                     <input type="text" id="furniture-name" required>
                 </div>
                 <div class="form-group">
-                    <label for="furniture-type">Product Type</label>
+                    <label for="furniture-type">Type de Produit</label>
                     <select id="furniture-type" required>
                         <option value="abri_voyageurs">Abri Voyageurs</option>
                         <option value="bancs">Bancs</option>
@@ -396,19 +407,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="furniture-material">Material</label>
+                    <label for="furniture-material">Matériau</label>
                     <select id="furniture-material" required>
-                        <option value="glass">Tempered Glass</option>
+                        <option value="glass">Verre Trempé</option>
                         <option value="amika">Amika</option>
-                        <option value="metal">Sheet Metal</option>
-                        <option value="aluminum">Aluminum</option>
+                        <option value="metal">Tôle</option>
+                        <option value="aluminum">Aluminium</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="furniture-status">Status</label>
+                    <label for="furniture-status">Statut</label>
                     <select id="furniture-status" required>
-                        <option value="installed">Installed</option>
-                        <option value="pending">Pending</option>
+                        <option value="installed">Installé</option>
+                        <option value="pending">En attente</option>
                         <option value="maintenance">Maintenance</option>
                     </select>
                 </div>
@@ -417,13 +428,15 @@
                     <input type="text" id="furniture-notes">
                 </div>
                 <div class="form-group">
-                    <label>Location: <span id="location-coords">Selected location coordinates</span></label>
+                    <label>Localisation: <span id="location-coords">Coordonnées sélectionnées</span></label>
                     <input type="hidden" id="furniture-lat">
                     <input type="hidden" id="furniture-lng">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="close-modal">Cancel</button>
-                    <button type="submit" class="success">Save Product</button>
+                    <div class="left-buttons">
+                        <button type="button" class="close-modal">Annuler</button>
+                    </div>
+                    <button type="submit" class="success">Enregistrer</button>
                 </div>
             </form>
         </div>
@@ -433,13 +446,15 @@
     <div class="modal" id="delete-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Confirm Delete</h3>
+                <h3>Confirmer la Suppression</h3>
                 <button class="close-modal">&times;</button>
             </div>
-            <p>Are you sure you want to delete this product?</p>
+            <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>
             <div class="modal-footer">
-                <button type="button" class="close-modal">Cancel</button>
-                <button type="button" class="danger" id="confirm-delete">Delete</button>
+                <div class="left-buttons">
+                    <button type="button" class="close-modal">Annuler</button>
+                </div>
+                <button type="button" class="danger" id="confirm-delete">Supprimer</button>
             </div>
         </div>
     </div>
@@ -450,11 +465,27 @@
             // Initialize the map
             const map = L.map('map').setView([48.8566, 2.3522], 13);
             
-            // Add OpenStreetMap tiles
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            // Define base layers
+            const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributeurs',
                 maxZoom: 19
-            }).addTo(map);
+            });
+            
+            const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                maxZoom: 19
+            });
+            
+            // Add base layers to map with street map as default
+            streetMap.addTo(map);
+            
+            // Create layer control
+            const baseLayers = {
+                "Plan": streetMap,
+                "Vue Satellite": satelliteMap
+            };
+            
+            L.control.layers(baseLayers, null, {position: 'topright'}).addTo(map);
             
             // Data storage
             let furnitureItems = JSON.parse(localStorage.getItem('pubcity_furniture')) || [];
@@ -517,12 +548,12 @@
                 marker.bindPopup(`
                     <h4>${item.name}</h4>
                     <p><strong>Type:</strong> ${formatType(item.type)}</p>
-                    <p><strong>Material:</strong> ${formatMaterial(item.material)}</p>
-                    <p><strong>Status:</strong> <span class="status-badge status-${item.status}">${formatStatus(item.status)}</span></p>
+                    <p><strong>Matériau:</strong> ${formatMaterial(item.material)}</p>
+                    <p><strong>Statut:</strong> <span class="status-badge status-${item.status}">${formatStatus(item.status)}</span></p>
                     ${item.notes ? `<p><strong>Notes:</strong> ${item.notes}</p>` : ''}
                     <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                        <button onclick="editFurniture('${item.id}')" style="padding: 3px 6px; font-size: 12px;">Edit</button>
-                        <button onclick="deleteFurniture('${item.id}')" style="padding: 3px 6px; font-size: 12px; background-color: #e74c3c;">Delete</button>
+                        <button onclick="editFurniture('${item.id}')" style="padding: 3px 6px; font-size: 12px;">Modifier</button>
+                        <button onclick="deleteFurniture('${item.id}')" style="padding: 3px 6px; font-size: 12px; background-color: #e74c3c;">Supprimer</button>
                     </div>
                 `);
                 
@@ -557,10 +588,10 @@
             // Format material for display
             function formatMaterial(material) {
                 const materials = {
-                    'glass': 'Tempered Glass',
+                    'glass': 'Verre Trempé',
                     'amika': 'Amika',
-                    'metal': 'Sheet Metal',
-                    'aluminum': 'Aluminum'
+                    'metal': 'Tôle',
+                    'aluminum': 'Aluminium'
                 };
                 return materials[material] || material;
             }
@@ -568,8 +599,8 @@
             // Format status for display
             function formatStatus(status) {
                 const statuses = {
-                    'installed': 'Installed',
-                    'pending': 'Pending',
+                    'installed': 'Installé',
+                    'pending': 'En attente',
                     'maintenance': 'Maintenance'
                 };
                 return statuses[status] || status;
@@ -620,7 +651,7 @@
                 });
                 
                 if (filteredItems.length === 0) {
-                    listContainer.innerHTML = '<p>No products found matching your filters.</p>';
+                    listContainer.innerHTML = '<p>Aucun produit trouvé avec ces filtres.</p>';
                     return;
                 }
                 
@@ -659,10 +690,10 @@
                 // Prepare data for export
                 const exportData = furnitureItems.map(item => ({
                     'ID': item.id,
-                    'Name': item.name,
+                    'Nom': item.name,
                     'Type': formatType(item.type),
-                    'Material': formatMaterial(item.material),
-                    'Status': formatStatus(item.status),
+                    'Matériau': formatMaterial(item.material),
+                    'Statut': formatStatus(item.status),
                     'Latitude': item.lat,
                     'Longitude': item.lng,
                     'Notes': item.notes || ''
@@ -673,10 +704,10 @@
                 
                 // Create workbook
                 const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "FurnitureData");
+                XLSX.utils.book_append_sheet(wb, ws, "MobilierUrbain");
                 
                 // Export to file
-                XLSX.writeFile(wb, "pubcity_furniture_data.xlsx");
+                XLSX.writeFile(wb, "pubcity_mobilier_urbain.xlsx");
             });
             
             // Import data from Excel
@@ -701,10 +732,10 @@
                             // Map Excel columns to our data structure
                             return {
                                 id: item.ID || generateId(),
-                                name: item.Name || 'Unnamed Product',
+                                name: item.Nom || 'Produit sans nom',
                                 type: getTypeKey(item.Type) || 'bancs',
-                                material: getMaterialKey(item.Material) || 'metal',
-                                status: getStatusKey(item.Status) || 'pending',
+                                material: getMaterialKey(item.Matériau) || 'metal',
+                                status: getStatusKey(item.Statut) || 'pending',
                                 lat: parseFloat(item.Latitude) || 0,
                                 lng: parseFloat(item.Longitude) || 0,
                                 notes: item.Notes || ''
@@ -717,10 +748,10 @@
                         loadMarkers();
                         updateFurnitureList();
                         
-                        alert(`Successfully imported ${importedItems.length} products`);
+                        alert(`Importation réussie de ${importedItems.length} produits`);
                     } catch (error) {
-                        console.error('Error importing file:', error);
-                        alert('Error importing file. Please check the file format.');
+                        console.error('Erreur lors de l\'importation:', error);
+                        alert('Erreur lors de l\'importation. Veuillez vérifier le format du fichier.');
                     }
                 };
                 reader.readAsArrayBuffer(file);
@@ -744,18 +775,18 @@
             
             function getMaterialKey(materialName) {
                 const materialMap = {
-                    'Tempered Glass': 'glass',
+                    'Verre Trempé': 'glass',
                     'Amika': 'amika',
-                    'Sheet Metal': 'metal',
-                    'Aluminum': 'aluminum'
+                    'Tôle': 'metal',
+                    'Aluminium': 'aluminum'
                 };
                 return materialMap[materialName];
             }
             
             function getStatusKey(statusName) {
                 const statusMap = {
-                    'Installed': 'installed',
-                    'Pending': 'pending',
+                    'Installé': 'installed',
+                    'En attente': 'pending',
                     'Maintenance': 'maintenance'
                 };
                 return statusMap[statusName];
@@ -785,7 +816,7 @@
                 }).addTo(map);
                 
                 // Set form values
-                modalTitle.textContent = 'Add a Product';
+                modalTitle.textContent = 'Ajouter un Produit';
                 furnitureForm.reset();
                 document.getElementById('furniture-id').value = '';
                 document.getElementById('furniture-lat').value = e.latlng.lat;
@@ -865,7 +896,7 @@
                 
                 editMode = true;
                 currentEditingId = id;
-                modalTitle.textContent = 'Edit Product';
+                modalTitle.textContent = 'Modifier le Produit';
                 
                 document.getElementById('furniture-id').value = item.id;
                 document.getElementById('furniture-name').value = item.name;
