@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUBCITY Urban Furniture Management</title>
+    <title>Gestion du mobilier urbain</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -281,6 +281,13 @@
             cursor: pointer;
         }
         
+        .leaflet-control-layers {
+            background: white;
+            padding: 5px;
+            border-radius: 4px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
         @media (max-width: 768px) {
             #map-container {
                 flex-direction: column;
@@ -318,7 +325,7 @@
     <div id="map-container">
         <div id="sidebar">
             <div class="sidebar-header">
-                <h2>PUBCITY Products</h2>
+                <h2>Gestion du mobilier urbain</h2>
                 <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-chevron-left"></i></button>
             </div>
             
@@ -448,13 +455,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize the map
-            const map = L.map('map').setView([36.76519, 3.05425], 13);
+            const map = L.map('map').setView([48.8566, 2.3522], 13);
             
-            // Add OpenStreetMap tiles
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            // Define base layers
+            const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxZoom: 19
-            }).addTo(map);
+            });
+            
+            const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                maxZoom: 19
+            });
+            
+            // Add base layers to map with street map as default
+            streetMap.addTo(map);
+            
+            // Create layer control
+            const baseLayers = {
+                "Street Map": streetMap,
+                "Satellite View": satelliteMap
+            };
+            
+            L.control.layers(baseLayers, null, {position: 'topright'}).addTo(map);
             
             // Data storage
             let furnitureItems = JSON.parse(localStorage.getItem('pubcity_furniture')) || [];
@@ -944,7 +967,7 @@
             
             // Reset view button
             document.getElementById('reset-view-btn').addEventListener('click', function() {
-                map.setView([48.8566, 2.3522], 13);
+                map.setView([36.76519, 3.05425], 13);
             });
             
             // Filter change events
