@@ -489,7 +489,7 @@
             L.control.layers(baseLayers, null, {position: 'topright'}).addTo(map);
             
             // Data storage
-            let furnitureItems = JSON.parse(localStorage.getItem('pubcity_furniture')) || [];
+            let furnitureItems = JSON.parse(localStorage.getItem('company_furniture')) || [];
             let markers = {};
             let currentMarker = null;
             let editMode = false;
@@ -621,7 +621,7 @@
             
             // Save data to localStorage
             function saveToLocalStorage() {
-                localStorage.setItem('pubcity_furniture', JSON.stringify(furnitureItems));
+                localStorage.setItem('company_furniture', JSON.stringify(furnitureItems));
             }
             
             // Load all markers
