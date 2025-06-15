@@ -203,6 +203,7 @@
         }
         
         .close-modal {
+            display: block;
             background: none;
             border: none;
             font-size: 1.5rem;
@@ -707,7 +708,7 @@
                 XLSX.utils.book_append_sheet(wb, ws, "MobilierUrbain");
                 
                 // Export to file
-                XLSX.writeFile(wb, "pubcity_mobilier_urbain.xlsx");
+                XLSX.writeFile(wb, "mobilier_urbain.xlsx");
             });
             
             // Import data from Excel
