@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -14,17 +29,14 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-       
         #map-container {
             display: flex;
             height: 100vh;
         }
-       
         #map {
             flex: 1;
             height: 100%;
         }
-       
         #sidebar {
             width: 300px;
             background: #f8f9fa;
@@ -33,44 +45,37 @@
             overflow-y: auto;
             transition: all 0.3s;
         }
-       
         #sidebar.collapsed {
             width: 50px;
             overflow: hidden;
         }
-       
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
-       
         .toggle-sidebar {
             background: none;
             border: none;
             cursor: pointer;
             font-size: 1.2rem;
         }
-       
         h2 {
             margin: 0;
             color: #2c3e50;
             font-size: 1.5rem;
         }
-       
         .filter-section {
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 1px solid #ddd;
         }
-       
         .filter-section h3 {
             margin-top: 0;
             font-size: 1.1rem;
             color: #34495e;
         }
-       
         select, input {
             width: 100%;
             padding: 8px;
@@ -78,7 +83,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-       
         button {
             background-color: #3498db;
             color: white;
@@ -89,39 +93,30 @@
             margin-right: 5px;
             font-size: 0.9rem;
         }
-       
         button:hover {
             background-color: #2980b9;
         }
-       
         button.danger {
             background-color: #e74c3c;
         }
-       
         button.danger:hover {
             background-color: #c0392b;
         }
-       
         button.success {
             background-color: #2ecc71;
         }
-       
         button.success:hover {
             background-color: #27ae60;
         }
-       
         button.warning {
             background-color: #f39c12;
         }
-       
         button.warning:hover {
             background-color: #e67e22;
         }
-       
         .furniture-list {
             margin-top: 20px;
         }
-       
         .furniture-item {
             padding: 10px;
             margin-bottom: 10px;
@@ -131,22 +126,18 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-       
         .furniture-item:hover {
             box-shadow: 0 3px 6px rgba(0,0,0,0.15);
         }
-       
         .furniture-item h4 {
             margin: 0 0 5px 0;
             color: #2c3e50;
         }
-       
         .furniture-item p {
             margin: 0;
             font-size: 0.9rem;
             color: #7f8c8d;
         }
-       
         .status-badge {
             display: inline-block;
             padding: 2px 6px;
@@ -154,22 +145,18 @@
             font-size: 0.8rem;
             margin-right: 5px;
         }
-       
         .status-installed {
             background-color: #d5f5e3;
             color: #27ae60;
         }
-       
         .status-pending {
             background-color: #fdebd0;
             color: #f39c12;
         }
-       
         .status-maintenance {
             background-color: #fadbd8;
             color: #e74c3c;
         }
-       
         .modal {
             display: none;
             position: fixed;
@@ -182,7 +169,6 @@
             justify-content: center;
             align-items: center;
         }
-       
         .modal-content {
             background-color: white;
             padding: 20px;
@@ -190,18 +176,15 @@
             width: 400px;
             max-width: 90%;
         }
-       
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-       
         .modal-header h3 {
             margin: 0;
         }
-       
         .close-modal {
             background: none;
             border: none;
@@ -212,38 +195,31 @@
             margin: 0;
             line-height: 1;
         }
-       
         .close-modal:hover {
             color: #333;
         }
-       
         .form-group {
             margin-bottom: 15px;
         }
-       
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
         }
-       
         .form-group input, .form-group select {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-       
         .modal-footer {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
-       
         .modal-footer .left-buttons {
             display: flex;
         }
-       
         .material-icon {
             width: 20px;
             height: 20px;
@@ -251,12 +227,10 @@
             margin-right: 5px;
             vertical-align: middle;
         }
-       
         .glass { background-color: rgba(0, 183, 255, 0.5); border: 1px solid #00b7ff; }
         .amika { background-color: rgba(155, 89, 182, 0.5); border: 1px solid #9b59b6; }
         .metal { background-color: rgba(189, 195, 199, 0.5); border: 1px solid #bdc3c7; }
         .aluminum { background-color: rgba(52, 152, 219, 0.5); border: 1px solid #3498db; }
-       
         .map-click-instruction {
             position: absolute;
             top: 10px;
@@ -268,7 +242,6 @@
             z-index: 1000;
             font-size: 14px;
         }
-       
         .file-input-container {
             margin-top: 10px;
             position: relative;
@@ -276,13 +249,11 @@
             display: inline-block;
             width: 100%;
         }
-       
         .file-input-button {
             width: 100%;
             padding: 8px 12px;
             text-align: center;
         }
-       
         .file-input {
             position: absolute;
             left: 0;
@@ -292,39 +263,32 @@
             height: 100%;
             cursor: pointer;
         }
-       
         .leaflet-control-layers {
             background: white;
             padding: 5px;
             border-radius: 4px;
             box-shadow: 0 1px 5px rgba(0,0,0,0.2);
         }
-       
         @media (max-width: 768px) {
             #map-container {
                 flex-direction: column;
             }
-           
             #sidebar {
                 width: 100%;
                 height: 250px;
                 border-right: none;
                 border-bottom: 1px solid #ddd;
             }
-           
             #sidebar.collapsed {
                 width: 100%;
                 height: 50px;
             }
-           
             #map {
                 height: calc(100vh - 250px);
             }
-           
             #sidebar.collapsed + #map {
                 height: calc(100vh - 50px);
             }
-           
             .map-click-instruction {
                 top: 60px;
                 right: auto;
@@ -332,16 +296,14 @@
             }
         }
         .search-section {
-    margin-bottom: 15px;
-}
-
-#search-bar {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
+            margin-bottom: 15px;
+        }
+        #search-bar {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -351,14 +313,9 @@
                 <h2>Gestion du Mobilier Urbain</h2>
                 <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-chevron-left"></i></button>
             </div>
-           <!-- Dans la sidebar, juste avant la furniture-list -->
-<div class="search-section">
-    <input type="text" id="search-bar" placeholder="Rechercher un produit...">
-</div>
-<div class="furniture-list" id="furniture-list">
-    <!-- Items will be peuplés ici -->
-</div>
-
+            <div class="search-section">
+                <input type="text" id="search-bar" placeholder="Rechercher un produit...">
+            </div>
             <div class="filter-section">
                 <h3>Filtres</h3>
                 <select id="type-filter">
@@ -370,14 +327,12 @@
                     <option value="bornes">Bornes</option>
                     <option value="potelets">Potelets</option>
                 </select>
-               
                 <select id="status-filter">
                     <option value="all">Tous les statuts</option>
                     <option value="installed">Installé</option>
                     <option value="pending">En attente</option>
                     <option value="maintenance">Maintenance</option>
                 </select>
-               
                 <select id="material-filter">
                     <option value="all">Tous les matériaux</option>
                     <option value="glass">Verre Trempé</option>
@@ -386,7 +341,6 @@
                     <option value="aluminum">Aluminium</option>
                 </select>
             </div>
-           
             <div class="actions-section">
                 <button id="reset-view-btn"><i class="fas fa-home"></i> Réinitialiser</button>
                 <button id="export-btn" class="warning"><i class="fas fa-file-export"></i> Exporter</button>
@@ -395,19 +349,16 @@
                     <input type="file" id="import-file" class="file-input" accept=".xlsx,.xls,.csv">
                 </div>
             </div>
-           
             <div class="furniture-list" id="furniture-list">
                 <!-- Items will be populated here -->
             </div>
         </div>
-       
         <div id="map">
             <div class="map-click-instruction">
                 <i class="fas fa-mouse-pointer"></i> Cliquez sur la carte pour ajouter un produit
             </div>
         </div>
     </div>
-   
     <!-- Add/Edit Modal -->
     <div class="modal" id="furniture-modal">
         <div class="modal-content">
@@ -477,7 +428,6 @@
             </form>
         </div>
     </div>
-   
     <!-- Delete Confirmation Modal -->
     <div class="modal" id="delete-modal">
         <div class="modal-content">
@@ -492,61 +442,44 @@
             </div>
         </div>
     </div>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-       
-
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize the map
             const map = L.map('map').setView([36.76519, 3.05425], 13);
-           
-            // Define base layers
             const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributeurs',
                 maxZoom: 19
             });
-           
             const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
                 maxZoom: 19
             });
-           
-            // Add base layers to map with street map as default
             streetMap.addTo(map);
-           
-            // Create layer control
             const baseLayers = {
                 "Plan": streetMap,
                 "Vue Satellite": satelliteMap
             };
-           
             L.control.layers(baseLayers, null, {position: 'topright'}).addTo(map);
-           
-            // Data storage
+
             let furnitureItems = JSON.parse(localStorage.getItem('company_furniture')) || [];
             let markers = {};
             let currentMarker = null;
             let editMode = false;
             let currentEditingId = null;
-           
-            // Icon creation function
+
             function createCustomIcon(type, status, material) {
                 let iconColor;
-               
-                // Color by status
                 if (status === 'installed') iconColor = '#2ecc71';
                 else if (status === 'pending') iconColor = '#f39c12';
                 else if (status === 'maintenance') iconColor = '#e74c3c';
-               
-                // Material icon
+
                 let materialClass = '';
                 if (material === 'glass') materialClass = 'glass';
                 else if (material === 'amika') materialClass = 'amika';
                 else if (material === 'metal') materialClass = 'metal';
                 else if (material === 'aluminum') materialClass = 'aluminum';
-               
-                // Create a custom HTML for the icon
+
                 const iconHtml = `
                     <div style="
                         background: ${iconColor};
@@ -562,7 +495,6 @@
                         <div class="material-icon ${materialClass}"></div>
                     </div>
                 `;
-               
                 return L.divIcon({
                     html: iconHtml,
                     className: 'custom-icon',
@@ -570,17 +502,13 @@
                     iconAnchor: [12, 12]
                 });
             }
-           
-            // Add a marker to the map
+
             function addMarker(item) {
                 const icon = createCustomIcon(item.type, item.status, item.material);
-               
                 const marker = L.marker([item.lat, item.lng], {
                     icon: icon,
                     draggable: true
                 }).addTo(map);
-               
-                // Add popup with info
                 marker.bindPopup(`
                     <h4>${item.name}</h4>
                     <p><strong>Type:</strong> ${formatType(item.type)}</p>
@@ -595,23 +523,16 @@
                         <button onclick="deleteFurniture('${item.id}')" style="padding: 3px 6px; font-size: 12px; background-color: #e74c3c;">Supprimer</button>
                     </div>
                 `);
-               
-                // Store reference to marker
                 markers[item.id] = marker;
-               
-                // Update position when dragged
                 marker.on('dragend', function(e) {
                     const newPos = marker.getLatLng();
                     updateFurniturePosition(item.id, newPos.lat, newPos.lng);
                 });
-               
-                // Open popup when clicked
                 marker.on('click', function() {
                     highlightListItem(item.id);
                 });
             }
-           
-            // Format type for display
+
             function formatType(type) {
                 const types = {
                     'abri_voyageurs': 'Abri Voyageurs',
@@ -623,8 +544,7 @@
                 };
                 return types[type] || type;
             }
-           
-            // Format material for display
+
             function formatMaterial(material) {
                 const materials = {
                     'glass': 'Verre Trempé',
@@ -634,8 +554,7 @@
                 };
                 return materials[material] || material;
             }
-           
-            // Format status for display
+
             function formatStatus(status) {
                 const statuses = {
                     'installed': 'Installé',
@@ -644,8 +563,7 @@
                 };
                 return statuses[status] || status;
             }
-           
-            // Update furniture position in data and localStorage
+
             function updateFurniturePosition(id, lat, lng) {
                 furnitureItems = furnitureItems.map(item => {
                     if (item.id === id) {
@@ -656,49 +574,40 @@
                 saveToLocalStorage();
                 updateFurnitureList();
             }
-           
-            // Save data to localStorage
+
             function saveToLocalStorage() {
                 localStorage.setItem('company_furniture', JSON.stringify(furnitureItems));
             }
-           
-            // Load all markers
+
             function loadMarkers() {
-                // Clear existing markers
                 Object.values(markers).forEach(marker => map.removeLayer(marker));
                 markers = {};
-               
-                // Add markers from data
                 furnitureItems.forEach(item => {
                     addMarker(item);
                 });
             }
-           
-            // Update the furniture list in the sidebar
+
             function updateFurnitureList() {
                 const listContainer = document.getElementById('furniture-list');
                 listContainer.innerHTML = '';
-               
                 const typeFilter = document.getElementById('type-filter').value;
                 const statusFilter = document.getElementById('status-filter').value;
                 const materialFilter = document.getElementById('material-filter').value;
-               
+                const searchText = document.getElementById('search-bar').value.toLowerCase();
                 const filteredItems = furnitureItems.filter(item => {
                     return (typeFilter === 'all' || item.type === typeFilter) &&
                            (statusFilter === 'all' || item.status === statusFilter) &&
-                           (materialFilter === 'all' || item.material === materialFilter);
+                           (materialFilter === 'all' || item.material === materialFilter) &&
+                           (item.name.toLowerCase().includes(searchText));
                 });
-               
                 if (filteredItems.length === 0) {
-                    listContainer.innerHTML = '<p>Aucun produit trouvé avec ces filtres.</p>';
+                    listContainer.innerHTML = '<p>Aucun produit trouvé.</p>';
                     return;
                 }
-               
                 filteredItems.forEach(item => {
                     const itemElement = document.createElement('div');
                     itemElement.className = 'furniture-item';
                     itemElement.dataset.id = item.id;
-                    
                     let dateInfo = '';
                     if (item.status === 'installed' && item.installedDate) {
                         dateInfo = `<br><small>Installé le: ${item.installedDate}</small>`;
@@ -707,7 +616,6 @@
                     } else if (item.status === 'pending' && item.pendingDate) {
                         dateInfo = `<br><small>En attente depuis: ${item.pendingDate}</small>`;
                     }
-                    
                     itemElement.innerHTML = `
                         <h4>${item.name}</h4>
                         <p>
@@ -716,28 +624,23 @@
                             ${dateInfo}
                         </p>
                     `;
-                   
                     itemElement.addEventListener('click', function() {
                         const marker = markers[item.id];
                         map.setView(marker.getLatLng(), 18);
                         marker.openPopup();
                         highlightListItem(item.id);
                     });
-                   
                     listContainer.appendChild(itemElement);
                 });
             }
-           
-            // Highlight list item when marker is clicked
+
             function highlightListItem(id) {
                 document.querySelectorAll('.furniture-item').forEach(item => {
                     item.style.backgroundColor = item.dataset.id === id ? '#e8f4fc' : 'white';
                 });
             }
-           
-            // Export data to Excel
+
             document.getElementById('export-btn').addEventListener('click', function() {
-                // Prepare data for export
                 const exportData = furnitureItems.map(item => ({
                     'ID': item.id,
                     'Nom': item.name,
@@ -751,38 +654,23 @@
                     'Longitude': item.lng,
                     'Notes': item.notes || ''
                 }));
-               
-                // Create worksheet
                 const ws = XLSX.utils.json_to_sheet(exportData);
-               
-                // Create workbook
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "MobilierUrbain");
-               
-                // Export to file
                 XLSX.writeFile(wb, "mobilier_urbain.xlsx");
             });
-           
-            // Import data from Excel
+
             document.getElementById('import-file').addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (!file) return;
-               
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     try {
                         const data = new Uint8Array(e.target.result);
                         const workbook = XLSX.read(data, { type: 'array' });
-                       
-                        // Get first worksheet
                         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                       
-                        // Convert to JSON
                         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-                       
-                        // Transform to our format
                         const importedItems = jsonData.map(item => {
-                            // Map Excel columns to our data structure
                             return {
                                 id: item.ID || generateId(),
                                 name: item.Nom || 'Produit sans nom',
@@ -797,14 +685,10 @@
                                 pendingDate: item['En attente depuis'] || ''
                             };
                         });
-                       
-                        // Replace current data with imported data
                         furnitureItems = importedItems;
                         saveToLocalStorage();
                         loadMarkers();
-                         document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
                         updateFurnitureList();
-                       
                         alert(`Importation réussie de ${importedItems.length} produits`);
                     } catch (error) {
                         console.error('Erreur lors de l\'importation:', error);
@@ -812,12 +696,9 @@
                     }
                 };
                 reader.readAsArrayBuffer(file);
-               
-                // Reset file input
                 e.target.value = '';
             });
-           
-            // Helper functions for import
+
             function getTypeKey(typeName) {
                 const typeMap = {
                     'Abri Voyageurs': 'abri_voyageurs',
@@ -829,7 +710,6 @@
                 };
                 return typeMap[typeName];
             }
-           
             function getMaterialKey(materialName) {
                 const materialMap = {
                     'Verre Trempé': 'glass',
@@ -839,7 +719,6 @@
                 };
                 return materialMap[materialName];
             }
-           
             function getStatusKey(statusName) {
                 const statusMap = {
                     'Installé': 'installed',
@@ -848,74 +727,52 @@
                 };
                 return statusMap[statusName];
             }
-           
-            // Initialize modals
+
             const furnitureModal = document.getElementById('furniture-modal');
             const deleteModal = document.getElementById('delete-modal');
             const modalTitle = document.getElementById('modal-title');
             const furnitureForm = document.getElementById('furniture-form');
             const closeModalButtons = document.querySelectorAll('.close-modal');
-           
-            // Handle status change to show appropriate date field
+
             document.getElementById('furniture-status').addEventListener('change', function() {
                 const status = this.value;
                 document.getElementById('installed-date-group').style.display = status === 'installed' ? 'block' : 'none';
                 document.getElementById('maintenance-date-group').style.display = status === 'maintenance' ? 'block' : 'none';
                 document.getElementById('pending-date-group').style.display = status === 'pending' ? 'block' : 'none';
-                
-                // Set current date as default
                 const today = new Date().toISOString().split('T')[0];
                 if (status === 'installed') document.getElementById('furniture-installed-date').value = today;
                 if (status === 'maintenance') document.getElementById('furniture-maintenance-date').value = today;
                 if (status === 'pending') document.getElementById('furniture-pending-date').value = today;
             });
-           
-            // Handle map click to add new product
+
             map.on('click', function(e) {
-                // Don't open modal if we're in edit mode
                 if (editMode) return;
-               
-                // Remove previous temporary marker if exists
                 if (currentMarker) {
                     map.removeLayer(currentMarker);
                 }
-               
-                // Add new temporary marker
                 currentMarker = L.marker(e.latlng, {
                     icon: createCustomIcon('bancs', 'pending', 'metal'),
                     draggable: true
                 }).addTo(map);
-               
-                // Set form values
                 modalTitle.textContent = 'Ajouter un Produit';
                 furnitureForm.reset();
                 document.getElementById('furniture-id').value = '';
                 document.getElementById('furniture-lat').value = e.latlng.lat;
                 document.getElementById('furniture-lng').value = e.latlng.lng;
-                document.getElementById('location-coords').textContent =
-                    `${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)}`;
-                
-                // Set default status to pending and trigger change event
+                document.getElementById('location-coords').textContent = `${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)}`;
                 document.getElementById('furniture-status').value = 'pending';
                 document.getElementById('furniture-status').dispatchEvent(new Event('change'));
-               
-                // Open the modal
                 furnitureModal.style.display = 'flex';
-               
-                // Update position when dragged
                 currentMarker.on('dragend', function(e) {
                     const newPos = currentMarker.getLatLng();
                     document.getElementById('furniture-lat').value = newPos.lat;
                     document.getElementById('furniture-lng').value = newPos.lng;
-                    document.getElementById('location-coords').textContent =
-                        `${newPos.lat.toFixed(6)}, ${newPos.lng.toFixed(6)}`;
+                    document.getElementById('location-coords').textContent = `${newPos.lat.toFixed(6)}, ${newPos.lng.toFixed(6)}`;
                 });
             });
-           
-            // Form submission
+
             furnitureForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-               
                 const id = document.getElementById('furniture-id').value || generateId();
                 const name = document.getElementById('furniture-name').value;
                 const type = document.getElementById('furniture-type').value;
@@ -924,7 +781,6 @@
                 const notes = document.getElementById('furniture-notes').value;
                 const lat = document.getElementById('furniture-lat').value;
                 const lng = document.getElementById('furniture-lng').value;
-               
                 const furnitureItem = {
                     id,
                     name,
@@ -938,22 +794,16 @@
                     maintenanceDate: document.getElementById('furniture-maintenance-date').value || '',
                     pendingDate: document.getElementById('furniture-pending-date').value || ''
                 };
-               
                 if (editMode) {
-                    // Update existing item
                     furnitureItems = furnitureItems.map(item =>
                         item.id === currentEditingId ? furnitureItem : item
                     );
                 } else {
-                    // Add new item
                     furnitureItems.push(furnitureItem);
                 }
-               
                 saveToLocalStorage();
                 loadMarkers();
                 updateFurnitureList();
-               
-                // Close modal and cleanup
                 furnitureModal.style.display = 'none';
                 if (currentMarker) {
                     map.removeLayer(currentMarker);
@@ -961,21 +811,17 @@
                 }
                 editMode = false;
             });
-           
-            // Generate unique ID
+
             function generateId() {
                 return 'id-' + Math.random().toString(36).substr(2, 9);
             }
-           
-            // Edit furniture (exposed to global scope for popup buttons)
+
             window.editFurniture = function(id) {
                 const item = furnitureItems.find(item => item.id === id);
                 if (!item) return;
-               
                 editMode = true;
                 currentEditingId = id;
                 modalTitle.textContent = 'Modifier le Produit';
-               
                 document.getElementById('furniture-id').value = item.id;
                 document.getElementById('furniture-name').value = item.name;
                 document.getElementById('furniture-type').value = item.type;
@@ -984,66 +830,50 @@
                 document.getElementById('furniture-notes').value = item.notes || '';
                 document.getElementById('furniture-lat').value = item.lat;
                 document.getElementById('furniture-lng').value = item.lng;
-                document.getElementById('location-coords').textContent =
-                    `${item.lat.toFixed(6)}, ${item.lng.toFixed(6)}`;
-                
-                // Set dates
+                document.getElementById('location-coords').textContent = `${item.lat.toFixed(6)}, ${item.lng.toFixed(6)}`;
                 if (item.installedDate) document.getElementById('furniture-installed-date').value = item.installedDate;
                 if (item.maintenanceDate) document.getElementById('furniture-maintenance-date').value = item.maintenanceDate;
                 if (item.pendingDate) document.getElementById('furniture-pending-date').value = item.pendingDate;
-                
-                // Trigger status change to show correct date field
                 document.getElementById('furniture-status').dispatchEvent(new Event('change'));
-               
                 furnitureModal.style.display = 'flex';
-               
-                // Center map on the marker
                 if (markers[id]) {
                     map.setView(markers[id].getLatLng(), 18);
                     markers[id].openPopup();
                 }
             };
-           
-            // Delete furniture (exposed to global scope for popup buttons)
+
             window.deleteFurniture = function(id) {
                 currentEditingId = id;
                 deleteModal.style.display = 'flex';
             };
-           
-            // Confirm delete
+
             document.getElementById('confirm-delete').addEventListener('click', function() {
                 furnitureItems = furnitureItems.filter(item => item.id !== currentEditingId);
                 saveToLocalStorage();
-               
                 if (markers[currentEditingId]) {
                     map.removeLayer(markers[currentEditingId]);
                     delete markers[currentEditingId];
                 }
-               
                 updateFurnitureList();
                 deleteModal.style.display = 'none';
                 currentEditingId = null;
             });
-           
-            // Close modals
+
             closeModalButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     furnitureModal.style.display = 'none';
                     deleteModal.style.display = 'none';
                     editMode = false;
-                   
                     if (currentMarker && !editMode) {
                         map.removeLayer(currentMarker);
                         currentMarker = null;
                     }
                 });
             });
-           
-            // Toggle sidebar
+
             document.getElementById('toggle-sidebar').addEventListener('click', function() {
                 const sidebar = document.getElementById('sidebar');
                 sidebar.classList.toggle('collapsed');
-               
                 const icon = this.querySelector('i');
                 if (sidebar.classList.contains('collapsed')) {
                     icon.classList.remove('fa-chevron-left');
@@ -1052,86 +882,38 @@
                     icon.classList.remove('fa-chevron-right');
                     icon.classList.add('fa-chevron-left');
                 }
-               
-                // Trigger map resize to adjust to new sidebar width
                 setTimeout(() => {
                     map.invalidateSize();
                 }, 300);
             });
-           
-            // Reset view button
+
             document.getElementById('reset-view-btn').addEventListener('click', function() {
                 map.setView([36.76519, 3.05425], 13);
             });
-           
-            // Filter change events
+
+            // ✅ FIX: Attach search bar listener on load
+            document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
             document.getElementById('type-filter').addEventListener('change', updateFurnitureList);
             document.getElementById('status-filter').addEventListener('change', updateFurnitureList);
             document.getElementById('material-filter').addEventListener('change', updateFurnitureList);
-           
-            // Initial load
+
             loadMarkers();
             updateFurnitureList();
         });
-
-function updateFurnitureList() {
-    const listContainer = document.getElementById('furniture-list');
-    listContainer.innerHTML = '';
-   
-    const typeFilter = document.getElementById('type-filter').value;
-    const statusFilter = document.getElementById('status-filter').value;
-    const materialFilter = document.getElementById('material-filter').value;
-    const searchText = document.getElementById('search-bar')?.value.toLowerCase() || "";
-   
-    const filteredItems = furnitureItems.filter(item => {
-        return (typeFilter === 'all' || item.type === typeFilter) &&
-               (statusFilter === 'all' || item.status === statusFilter) &&
-               (materialFilter === 'all' || item.material === materialFilter) &&
-               (item.name.toLowerCase().includes(searchText));
-    });
-   
-    if (filteredItems.length === 0) {
-        listContainer.innerHTML = '<p>Aucun produit trouvé.</p>';
-        return;
-    }
-   
-    filteredItems.forEach(item => {
-        const itemElement = document.createElement('div');
-        itemElement.className = 'furniture-item';
-        itemElement.dataset.id = item.id;
-        
-        let dateInfo = '';
-        if (item.status === 'installed' && item.installedDate) {
-            dateInfo = `<br><small>Installé le: ${item.installedDate}</small>`;
-        } else if (item.status === 'maintenance' && item.maintenanceDate) {
-            dateInfo = `<br><small>Maintenu le: ${item.maintenanceDate}</small>`;
-        } else if (item.status === 'pending' && item.pendingDate) {
-            dateInfo = `<br><small>En attente depuis: ${item.pendingDate}</small>`;
-        }
-        
-        itemElement.innerHTML = `
-            <h4>${item.name}</h4>
-            <p>
-                <span class="status-badge status-${item.status}">${formatStatus(item.status)}</span>
-                ${formatType(item.type)} • ${formatMaterial(item.material)}
-                ${dateInfo}
-            </p>
-        `;
-       
-        itemElement.addEventListener('click', function() {
-            const marker = markers[item.id];
-            map.setView(marker.getLatLng(), 18);
-            marker.openPopup();
-            highlightListItem(item.id);
-        });
-       
-        listContainer.appendChild(itemElement);
-    });
-}
-
-
-        
     </script>
 </body>
 </html>
 
+
+    
+              <script>
+                              document.getElementById('import-file').addEventListener('change', function(e) {
+    // ...
+    document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
+});
+
+
+              </script>
+                        </body>
+                        </html>
+                    
