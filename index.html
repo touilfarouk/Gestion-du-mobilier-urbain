@@ -1,19 +1,4 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-    
-                
-              </style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +13,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
         }
         #map-container {
             display: flex;
@@ -304,6 +290,19 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        .search-highlight {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+        }
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
     </style>
 </head>
 <body>
@@ -467,6 +466,7 @@
             let currentMarker = null;
             let editMode = false;
             let currentEditingId = null;
+            let searchResults = [];
 
             function createCustomIcon(type, status, material) {
                 let iconColor;
@@ -594,44 +594,102 @@
                 const statusFilter = document.getElementById('status-filter').value;
                 const materialFilter = document.getElementById('material-filter').value;
                 const searchText = document.getElementById('search-bar').value.toLowerCase();
+
+                // Filter items based on all criteria
                 const filteredItems = furnitureItems.filter(item => {
                     return (typeFilter === 'all' || item.type === typeFilter) &&
                            (statusFilter === 'all' || item.status === statusFilter) &&
                            (materialFilter === 'all' || item.material === materialFilter) &&
                            (item.name.toLowerCase().includes(searchText));
                 });
+
+                // Store search results for map zooming
+                searchResults = filteredItems;
+
+                // Update sidebar list
                 if (filteredItems.length === 0) {
-                    listContainer.innerHTML = '<p>Aucun produit trouvé.</p>';
-                    return;
-                }
-                filteredItems.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'furniture-item';
-                    itemElement.dataset.id = item.id;
-                    let dateInfo = '';
-                    if (item.status === 'installed' && item.installedDate) {
-                        dateInfo = `<br><small>Installé le: ${item.installedDate}</small>`;
-                    } else if (item.status === 'maintenance' && item.maintenanceDate) {
-                        dateInfo = `<br><small>Maintenu le: ${item.maintenanceDate}</small>`;
-                    } else if (item.status === 'pending' && item.pendingDate) {
-                        dateInfo = `<br><small>En attente depuis: ${item.pendingDate}</small>`;
-                    }
-                    itemElement.innerHTML = `
-                        <h4>${item.name}</h4>
-                        <p>
-                            <span class="status-badge status-${item.status}">${formatStatus(item.status)}</span>
-                            ${formatType(item.type)} • ${formatMaterial(item.material)}
-                            ${dateInfo}
-                        </p>
-                    `;
-                    itemElement.addEventListener('click', function() {
-                        const marker = markers[item.id];
-                        map.setView(marker.getLatLng(), 18);
-                        marker.openPopup();
-                        highlightListItem(item.id);
+                    listContainer.innerHTML = '<div class="no-results">Aucun produit trouvé.</div>';
+                } else {
+                    filteredItems.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.className = 'furniture-item';
+                        itemElement.dataset.id = item.id;
+                        let dateInfo = '';
+                        if (item.status === 'installed' && item.installedDate) {
+                            dateInfo = `<br><small>Installé le: ${item.installedDate}</small>`;
+                        } else if (item.status === 'maintenance' && item.maintenanceDate) {
+                            dateInfo = `<br><small>Maintenu le: ${item.maintenanceDate}</small>`;
+                        } else if (item.status === 'pending' && item.pendingDate) {
+                            dateInfo = `<br><small>En attente depuis: ${item.pendingDate}</small>`;
+                        }
+                        itemElement.innerHTML = `
+                            <h4>${item.name}</h4>
+                            <p>
+                                <span class="status-badge status-${item.status}">${formatStatus(item.status)}</span>
+                                ${formatType(item.type)} • ${formatMaterial(item.material)}
+                                ${dateInfo}
+                            </p>
+                        `;
+                        itemElement.addEventListener('click', function() {
+                            const marker = markers[item.id];
+                            map.setView(marker.getLatLng(), 18);
+                            marker.openPopup();
+                            highlightListItem(item.id);
+                        });
+                        listContainer.appendChild(itemElement);
                     });
-                    listContainer.appendChild(itemElement);
+                }
+
+                // Update map markers visibility
+                updateMapMarkers(searchText, typeFilter, statusFilter, materialFilter);
+                
+                // Zoom to search results if search is active
+                if (searchText.trim() !== '') {
+                    zoomToSearchResults();
+                }
+            }
+
+            function updateMapMarkers(searchText, typeFilter, statusFilter, materialFilter) {
+                // Show/hide markers based on filters and search
+                furnitureItems.forEach(item => {
+                    const marker = markers[item.id];
+                    if (!marker) return;
+                    
+                    const matchesSearch = item.name.toLowerCase().includes(searchText.toLowerCase());
+                    const matchesType = typeFilter === 'all' || item.type === typeFilter;
+                    const matchesStatus = statusFilter === 'all' || item.status === statusFilter;
+                    const matchesMaterial = materialFilter === 'all' || item.material === materialFilter;
+                    
+                    if (matchesSearch && matchesType && matchesStatus && matchesMaterial) {
+                        marker.addTo(map);
+                        // Add highlight class if searching
+                        if (searchText.trim() !== '') {
+                            marker.getElement().classList.add('search-highlight');
+                        } else {
+                            marker.getElement().classList.remove('search-highlight');
+                        }
+                    } else {
+                        map.removeLayer(marker);
+                    }
                 });
+            }
+
+            function zoomToSearchResults() {
+                if (searchResults.length === 0) return;
+                
+                // Create a bounds object to fit all search results
+                const bounds = L.latLngBounds([]);
+                searchResults.forEach(item => {
+                    bounds.extend([item.lat, item.lng]);
+                });
+                
+                // If only one result, zoom to it with higher zoom level
+                if (searchResults.length === 1) {
+                    map.setView([searchResults[0].lat, searchResults[0].lng], 18);
+                } else {
+                    // Fit all results with padding
+                    map.fitBounds(bounds, { padding: [50, 50] });
+                }
             }
 
             function highlightListItem(id) {
@@ -889,13 +947,19 @@
 
             document.getElementById('reset-view-btn').addEventListener('click', function() {
                 map.setView([36.76519, 3.05425], 13);
+                // Reset search and filters
+                document.getElementById('search-bar').value = '';
+                document.getElementById('type-filter').value = 'all';
+                document.getElementById('status-filter').value = 'all';
+                document.getElementById('material-filter').value = 'all';
+                updateFurnitureList();
             });
 
-            // ✅ FIX: Attach search bar listener on load
-            document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
+            // Attach all filter and search listeners on load
             document.getElementById('type-filter').addEventListener('change', updateFurnitureList);
             document.getElementById('status-filter').addEventListener('change', updateFurnitureList);
             document.getElementById('material-filter').addEventListener('change', updateFurnitureList);
+            document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
 
             loadMarkers();
             updateFurnitureList();
@@ -903,17 +967,3 @@
     </script>
 </body>
 </html>
-
-
-    
-              <script>
-                              document.getElementById('import-file').addEventListener('change', function(e) {
-    // ...
-    document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
-});
-
-
-              </script>
-                        </body>
-                        </html>
-                    
