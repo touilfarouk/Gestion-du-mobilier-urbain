@@ -331,6 +331,17 @@
                 left: 10px;
             }
         }
+        .search-section {
+    margin-bottom: 15px;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
     </style>
 </head>
 <body>
@@ -340,7 +351,14 @@
                 <h2>Gestion du Mobilier Urbain</h2>
                 <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-chevron-left"></i></button>
             </div>
-           
+           <!-- Dans la sidebar, juste avant la furniture-list -->
+<div class="search-section">
+    <input type="text" id="search-bar" placeholder="Rechercher un produit...">
+</div>
+<div class="furniture-list" id="furniture-list">
+    <!-- Items will be peuplés ici -->
+</div>
+
             <div class="filter-section">
                 <h3>Filtres</h3>
                 <select id="type-filter">
@@ -477,6 +495,8 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+       
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize the map
             const map = L.map('map').setView([36.76519, 3.05425], 13);
@@ -782,6 +802,7 @@
                         furnitureItems = importedItems;
                         saveToLocalStorage();
                         loadMarkers();
+                         document.getElementById('search-bar').addEventListener('input', updateFurnitureList);
                         updateFurnitureList();
                        
                         alert(`Importation réussie de ${importedItems.length} produits`);
@@ -1052,6 +1073,64 @@
             loadMarkers();
             updateFurnitureList();
         });
+
+function updateFurnitureList() {
+    const listContainer = document.getElementById('furniture-list');
+    listContainer.innerHTML = '';
+   
+    const typeFilter = document.getElementById('type-filter').value;
+    const statusFilter = document.getElementById('status-filter').value;
+    const materialFilter = document.getElementById('material-filter').value;
+    const searchText = document.getElementById('search-bar')?.value.toLowerCase() || "";
+   
+    const filteredItems = furnitureItems.filter(item => {
+        return (typeFilter === 'all' || item.type === typeFilter) &&
+               (statusFilter === 'all' || item.status === statusFilter) &&
+               (materialFilter === 'all' || item.material === materialFilter) &&
+               (item.name.toLowerCase().includes(searchText));
+    });
+   
+    if (filteredItems.length === 0) {
+        listContainer.innerHTML = '<p>Aucun produit trouvé.</p>';
+        return;
+    }
+   
+    filteredItems.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'furniture-item';
+        itemElement.dataset.id = item.id;
+        
+        let dateInfo = '';
+        if (item.status === 'installed' && item.installedDate) {
+            dateInfo = `<br><small>Installé le: ${item.installedDate}</small>`;
+        } else if (item.status === 'maintenance' && item.maintenanceDate) {
+            dateInfo = `<br><small>Maintenu le: ${item.maintenanceDate}</small>`;
+        } else if (item.status === 'pending' && item.pendingDate) {
+            dateInfo = `<br><small>En attente depuis: ${item.pendingDate}</small>`;
+        }
+        
+        itemElement.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>
+                <span class="status-badge status-${item.status}">${formatStatus(item.status)}</span>
+                ${formatType(item.type)} • ${formatMaterial(item.material)}
+                ${dateInfo}
+            </p>
+        `;
+       
+        itemElement.addEventListener('click', function() {
+            const marker = markers[item.id];
+            map.setView(marker.getLatLng(), 18);
+            marker.openPopup();
+            highlightListItem(item.id);
+        });
+       
+        listContainer.appendChild(itemElement);
+    });
+}
+
+
+        
     </script>
 </body>
 </html>
